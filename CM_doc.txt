@@ -1,1 +1,41 @@
-In project use ECS network
+# Architecture Metadata
+1. **Project Name**: ECS Network Racing Sample
+2. **Project Description**: ECS multiplayer racing sample to showcase using Unity Entities and netcode with best practices.
+3. **General Architecture Pattern**: Entity Component System (ECS)
+4. **General Architecture Approach**: ECS is used for boosting performance in multiplayer racing game with netcode for networking.
+5. **Main frameworks used**:
+    - Unity Entities - provides a modern Entity Component System (ECS) implementation with a basic set of systems and components made for Unity.
+    - Netcode for Entities - Unity's Data Oriented Technology Stack (DOTS) multiplayer netcode layer - a high level netcode system built on entities. This package provides a foundation for creating networked multiplayer applications within DOTS.
+    - UI Toolkit - a collection of features, resources, and tools for developing user interface (UI). It is the newest UI system in Unity designed to optimize performance across platforms, and is based on standard web technologies.
+    - Vivox - Unity's voice and text chat service, for multiplayer communication, offers a voice chat and direct message text service with a managed hosted solution.
+    - Test Framework - for running Edit mode and Play mode tests in Unity. Based on custom version of the NUnit package build to work with Unity.
+6. **Project Features**
+    - Burst - compiler that translates from IL/.NET bytecode to highly optimized native code using LLVM.
+    - Baking - a non-reversible process that turns a performance-intensive but flexible set of GameObjects into a set of entities and components optimized for performance.
+    - Blob assets - represent immutable binary data that can be accessed safely in parallel.
+    - Unity Physics - Unity's C# stateless physics library. Built on top of the Unity C# DOTS framework, Unity Physics is network-ready, completely customizable, and built for performance out of the box.
+7. **Basic project's entities**:
+    - Entity (ECS) - has neither behavior nor data; instead, it identifies which pieces of data (components) belong together.
+    - Component (ECS) - represent the data of your game or application.
+    - System (ECS) - provides the logic that transforms the component data from its current state to its next state.
+    - Aspect - an object-like wrapper that you can use to group together a subset of an entity's components into a single C# struct.
+    - Jobs - job system lets you create multithreaded code so that your application can use all available CPU cores to execute your code. 
+    - Baker - a simple baking system uses a baker to read data from the input authoring scene, and writes the data as components on entities as the output.
+    - Manager - a singletone responsible for accessing, processing data and performing global actions.
+    - Panel/Screen - contains live information regarding game state and provides input via buttons or other elements. Uses UI Toolkit (UIDocument, VisualElement).
+    - Popup - shows a message (e.g. info, error) to player. Uses UI Toolkit (UIDocument, VisualElement).
+8. **Rules**:
+    - favor unmanaged component system when possible for maximum performance
+    - avoid hard referencing between ECS systems, instead rely on data querying to accomplish state transitions
+    - avoid using public data on systems
+    - avoid too much data in one component
+    - avoid too much logic in one system
+9. **Restrictions**:
+    - Use UI Toolkit instead of Unity UI for consistency
+    - New audio clips should be added to PlayerAudioManager before used elsewhere
+10. **Rendering approach:** We are using Universal Render Pipeline with High Fidelity.
+11. **Other Assets:**
+    - Cinemachine - a suite of modules for operating the Unity camera. It solves the complex mathematics and logic of tracking targets, composing, blending, and cutting between shots.
+    - Newtonsoft Json - used for advanced json serialization and deserialization.
+    - Terrain Tools - adds additional Terrain sculpting brushes and tools to Unity.
+    - TextMeshPro - the ultimate text solution for Unity. It's the perfect replacement for Unity's UI Text and the legacy Text Mesh.
